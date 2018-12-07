@@ -1,0 +1,9 @@
+query UserRepositoriesQuery($user_login: String!) {
+  user(login: $user_login) {
+    repositories(last: 100) {
+      nodes {
+        name
+      }
+    }
+  }
+}
