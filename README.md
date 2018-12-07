@@ -1,2 +1,2 @@
 # RepoBrowser
-Android app written in Kotlin that use GraphQL Github API to obtain data
+The Android app written in Kotlin that uses GraphQL Github API to obtain data
