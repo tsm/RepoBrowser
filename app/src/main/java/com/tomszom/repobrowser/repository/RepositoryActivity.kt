@@ -1,18 +1,21 @@
-package com.tomszom.repobrowser.presentation
+package com.tomszom.repobrowser.repository
 
 import android.os.Bundle
 import android.support.design.widget.Snackbar
-import android.support.v7.app.AppCompatActivity;
 import com.tomszom.repobrowser.R
+import com.tomszom.repobrowser.core.presentation.BaseActivity
+import kotlinx.android.synthetic.main.base_toolbar.*
 
-import kotlinx.android.synthetic.main.main_activity.*
+import kotlinx.android.synthetic.main.repository_activity.*
 
-class MainActivity : AppCompatActivity() {
+class RepositoryActivity : BaseActivity() {
+
+    override fun layoutId() = R.layout.repository_activity
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.main_activity)
-        setSupportActionBar(toolbar)
+
+        setSupportActionBar(commonToolbar)
 
         fab.setOnClickListener { view ->
             Snackbar.make(view, "TODO add", Snackbar.LENGTH_LONG)

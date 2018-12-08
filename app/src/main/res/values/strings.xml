@@ -2,4 +2,6 @@
     <string name="app_name">RepoBrowser</string>
 
     <string name="repository_empty_list">Ups, your repository list is empty</string>
+    <string name="common_error">Ups, something went wrong</string>
+    <string name="common_action_retry">Retry</string>
 </resources>

@@ -1,16 +1,14 @@
-package com.tomszom.repobrowser.presentation.repository
+package com.tomszom.repobrowser.repository
 
-import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import com.apollographql.apollo.ApolloClient
 import com.apollographql.apollo.api.Response
 import com.apollographql.apollo.rx2.Rx2Apollo
 import com.tomszom.repobrowser.R
 import com.tomszom.repobrowser.UserRepositoriesQuery
+import com.tomszom.repobrowser.core.extension.gone
+import com.tomszom.repobrowser.core.extension.visible
+import com.tomszom.repobrowser.core.presentation.BaseFragment
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
@@ -18,16 +16,11 @@ import kotlinx.android.synthetic.main.repository_fragment.*
 import okhttp3.OkHttpClient
 
 
-class RepositoryFragment : Fragment() {
+class RepositoryFragment : BaseFragment() {
+
+    override fun layoutId() = R.layout.repository_fragment
 
     private var repositoriesDisposable: Disposable? = null
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.repository_fragment, container, false)
-    }
 
     override fun onResume() {
         super.onResume()
@@ -70,20 +63,31 @@ class RepositoryFragment : Fragment() {
         }
         repositoriesDisposable = repositoriesObservable.subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
+            .doOnSubscribe {
+                showProgress()
+                repositoryEmptyView.gone()
+            }
+            .doOnTerminate { hideProgress() }
             .subscribe(
                 { response ->
                     showRepositories(mapResponseToList(response))
                 },
                 { e ->
                     e.printStackTrace()
+                    notifyWithAction(R.string.common_error, R.string.common_action_retry) { loadRepositories() }
                 }
             )
     }
 
     private fun showRepositories(list: List<UserRepositoriesQuery.Node>) {
-        val sb = StringBuilder()
-        list.map { sb.append(it.name()).append("\n") }
-        repositoryEmptyTV.text = sb.toString()
+        if (list.isEmpty()) {
+            repositoryEmptyView.visible()
+        } else { //TODO use adapter and Recycler
+            val sb = StringBuilder()
+            list.map { sb.append(it.name()).append("\n") }
+            repositoryEmptyView.text = sb.toString()
+            repositoryEmptyView.visible()
+        }
     }
 
     private fun mapResponseToList(response: Response<UserRepositoriesQuery.Data>?): List<UserRepositoriesQuery.Node> {
