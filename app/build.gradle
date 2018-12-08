@@ -51,3 +51,11 @@ dependencies {
 androidExtensions {
     experimental = true
 }
+
+apollo {
+    customTypeMapping = [
+            "URL" : "java.lang.String"
+    ]
+    suppressRawTypesWarning = true
+}
+

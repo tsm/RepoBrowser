@@ -6,12 +6,15 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import com.apollographql.apollo.ApolloClient
 import com.apollographql.apollo.api.Response
+import com.apollographql.apollo.response.CustomTypeAdapter
+import com.apollographql.apollo.response.CustomTypeValue
 import com.apollographql.apollo.rx2.Rx2Apollo
 import com.tomszom.repobrowser.R
 import com.tomszom.repobrowser.UserRepositoriesQuery
 import com.tomszom.repobrowser.core.extension.gone
 import com.tomszom.repobrowser.core.extension.visible
 import com.tomszom.repobrowser.core.presentation.BaseFragment
+import com.tomszom.repobrowser.type.CustomType
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
@@ -61,6 +64,16 @@ class RepositoryFragment : BaseFragment() {
 
         val token = getString(R.string.github_oauth_token)
 
+        val uriCustomTypeAdapter = object : CustomTypeAdapter<String> {
+            override fun decode(value: CustomTypeValue<*>): String {
+                return value.value.toString()
+            }
+
+            override fun encode(value: String): CustomTypeValue<*> {
+                return CustomTypeValue.GraphQLString(value)
+            }
+        }
+
         val apolloClient = ApolloClient.builder()
             .serverUrl(serverUrl)
             .okHttpClient(OkHttpClient.Builder()
@@ -70,6 +83,7 @@ class RepositoryFragment : BaseFragment() {
                         .build()
                 }
                 .build())
+            .addCustomTypeAdapter(CustomType.URI, uriCustomTypeAdapter)
             .build()
 
         val query = UserRepositoriesQuery.builder().user_login(getGitUser()).build()

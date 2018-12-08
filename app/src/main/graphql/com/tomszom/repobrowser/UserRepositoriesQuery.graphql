@@ -3,6 +3,7 @@ query UserRepositoriesQuery($user_login: String!) {
     repositories(last: 100) {
       nodes {
         name
+        url
       }
     }
   }
