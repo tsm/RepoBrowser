@@ -6,6 +6,7 @@ import com.tomszom.repobrowser.BuildConfig
 import com.tomszom.repobrowser.UserRepositoriesQuery
 import com.tomszom.repobrowser.core.network.NetworkClientProvider
 import com.tomszom.repobrowser.core.presentation.BasePresenter
+import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
@@ -23,17 +24,7 @@ class RepositoryPresenter : BasePresenter(), RepositoryContract.Presenter {
     }
 
     private fun loadRepositories() {
-
-        val apolloClient = NetworkClientProvider.provideApolloClient(view.getToken())
-
-        val query = UserRepositoriesQuery.builder().user_login(view.getGitUser()).build()
-
-        val apolloCall = apolloClient.query(query)
-
-
-        val repositoriesObservable = Rx2Apollo.from<UserRepositoriesQuery.Data>(apolloCall)
-
-        repositoriesObservable
+        getRepositoryListObservable(view.getGitUser())
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe {
@@ -56,6 +47,16 @@ class RepositoryPresenter : BasePresenter(), RepositoryContract.Presenter {
                     view.showError()
                 }
             ).addWeakDisposable("REPOSITORY_LIST")
+    }
+
+    private fun getRepositoryListObservable(user: String): Observable<Response<UserRepositoriesQuery.Data>> {
+        val apolloClient = NetworkClientProvider.provideApolloClient(view.getToken())
+
+        val query = UserRepositoriesQuery.builder().user_login(user).build()
+
+        val apolloCall = apolloClient.query(query)
+
+        return Rx2Apollo.from<UserRepositoriesQuery.Data>(apolloCall)
     }
 
     private fun mapResponseToList(response: Response<UserRepositoriesQuery.Data>?): List<UserRepositoriesQuery.Node> {
