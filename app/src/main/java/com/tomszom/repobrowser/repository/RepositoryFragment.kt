@@ -29,7 +29,12 @@ class RepositoryFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        showRepositoryListTitle(getGitUser())
         setupRecycler()
+    }
+
+    private fun showRepositoryListTitle(owner: String) {
+        getBaseActivity().setToolbarTitle(String.format(getString(R.string.repository_list_title), owner))
     }
 
     override fun onResume() {
@@ -49,6 +54,8 @@ class RepositoryFragment : BaseFragment() {
         repositoryList.adapter = repositoryAdapter
     }
 
+    fun getGitUser() = "tsm"
+
     private fun loadRepositories(){
         val serverUrl = "https://api.github.com/graphql"
 
@@ -65,7 +72,7 @@ class RepositoryFragment : BaseFragment() {
                 .build())
             .build()
 
-        val query = UserRepositoriesQuery.builder().user_login("tsm").build()
+        val query = UserRepositoriesQuery.builder().user_login(getGitUser()).build()
 
         val apolloCall = apolloClient.query(query)
 
@@ -75,7 +82,8 @@ class RepositoryFragment : BaseFragment() {
         if(repositoriesDisposable?.isDisposed == false){
             repositoriesDisposable?.dispose()
         }
-        repositoriesDisposable = repositoriesObservable.subscribeOn(Schedulers.io())
+        repositoriesDisposable = repositoriesObservable
+            .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe {
                 showProgress()

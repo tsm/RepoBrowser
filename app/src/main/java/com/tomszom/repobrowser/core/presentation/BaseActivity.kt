@@ -10,6 +10,7 @@ import com.tomszom.repobrowser.R
 import com.tomszom.repobrowser.core.extension.gone
 import com.tomszom.repobrowser.core.extension.visible
 import kotlinx.android.synthetic.main.base_content.*
+import kotlinx.android.synthetic.main.base_toolbar.*
 
 abstract class BaseActivity : AppCompatActivity() {
 
@@ -19,6 +20,14 @@ abstract class BaseActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(layoutId())
+
+        if (baseToolbar != null) {
+            setSupportActionBar(baseToolbar)
+        }
+    }
+
+    internal fun setToolbarTitle(title: String) {
+        this.title = title
     }
 
     internal fun notify(@StringRes message: Int) =
@@ -33,7 +42,7 @@ abstract class BaseActivity : AppCompatActivity() {
         snackBar.show()
     }
 
-    internal fun showProgress() = baseProgress.visible()
+    internal fun showProgress() = baseProgress?.visible()
 
-    internal fun hideProgress() = baseProgress.gone()
+    internal fun hideProgress() = baseProgress?.gone()
 }

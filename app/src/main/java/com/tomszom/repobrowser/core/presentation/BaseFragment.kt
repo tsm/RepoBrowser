@@ -13,7 +13,7 @@ abstract class BaseFragment : Fragment() {
     @LayoutRes
     abstract fun layoutId(): Int
 
-    private fun getBaseActivity() = activity as BaseActivity
+    protected fun getBaseActivity() = activity as BaseActivity
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
         inflater.inflate(layoutId(), container, false)

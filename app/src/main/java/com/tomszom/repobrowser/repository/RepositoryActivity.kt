@@ -4,8 +4,6 @@ import android.os.Bundle
 import android.support.design.widget.Snackbar
 import com.tomszom.repobrowser.R
 import com.tomszom.repobrowser.core.presentation.BaseActivity
-import kotlinx.android.synthetic.main.base_toolbar.*
-
 import kotlinx.android.synthetic.main.repository_activity.*
 
 class RepositoryActivity : BaseActivity() {
@@ -14,8 +12,6 @@ class RepositoryActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        setSupportActionBar(commonToolbar)
 
         fab.setOnClickListener { view ->
             Snackbar.make(view, "TODO add", Snackbar.LENGTH_LONG)
