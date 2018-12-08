@@ -57,7 +57,7 @@ class RepositoryFragment : BaseFragment() {
         repositoryList.adapter = repositoryAdapter
     }
 
-    fun getGitUser() = "tsm"
+    private fun getGitUser() = "tsm"
 
     private fun loadRepositories(){
         val serverUrl = "https://api.github.com/graphql"

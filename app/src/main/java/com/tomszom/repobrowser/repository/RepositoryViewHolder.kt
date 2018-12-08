@@ -15,6 +15,7 @@ class RepositoryViewHolder(override val containerView: View) : RecyclerView.View
 
     fun bind(model: UserRepositoriesQuery.Node) {
         repositoryItemName.text = model.name()
+        repositoryItemUrl.text = model.url() as String
     }
 
 }

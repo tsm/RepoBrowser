@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/CardItem"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:minHeight="70dp">
 
     <ImageView
         android:id="@+id/repositoryItemIcon"
@@ -12,24 +13,41 @@
         android:layout_height="wrap_content"
         android:src="@drawable/ic_repository"
         android:tint="@color/colorAccent"
-        android:layout_margin="8dp"
+        android:layout_margin="4dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:contentDescription="@null" />
 
     <TextView
         android:id="@+id/repositoryItemName"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:textColor="@color/textDark"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:paddingStart="8dp"
         android:paddingEnd="8dp"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:textColor="@color/textDark"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toEndOf="@id/repositoryItemIcon"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/repositoryItemUrl"
         tools:text="Repository name" />
+
+    <TextView
+        android:id="@+id/repositoryItemUrl"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:autoLink="web"
+        android:linksClickable="true"
+        app:layout_constraintTop_toBottomOf="@id/repositoryItemName"
+        app:layout_constraintStart_toEndOf="@id/repositoryItemIcon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:text="http://github.com/tsm/repositorybrowser" />
 
 </android.support.constraint.ConstraintLayout>
