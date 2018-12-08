@@ -1,31 +1,32 @@
 package com.tomszom.repobrowser.core.presentation
 
 import android.os.Bundle
-import android.support.annotation.LayoutRes
-import android.support.annotation.StringRes
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
-abstract class BaseFragment : Fragment() {
+abstract class BaseFragment<out P : BaseContract.Presenter> : Fragment(), BaseContract.View {
 
-    @LayoutRes
-    abstract fun layoutId(): Int
-
-    protected fun getBaseActivity() = activity as BaseActivity
+    abstract val presenter: P
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
-        inflater.inflate(layoutId(), container, false)
+        inflater.inflate(getLayoutId(), container, false)
 
-    protected fun notify(@StringRes message: Int) =
-        getBaseActivity().notify(message)
+    override fun onResume() {
+        super.onResume()
+        presenter.onResume()
+    }
 
-    protected fun notifyWithAction(@StringRes message: Int, @StringRes actionText: Int, action: () -> Any) =
-        getBaseActivity().notifyWithAction(message, actionText, action)
+    override fun onStop() {
+        super.onStop()
+        presenter.onStop()
+    }
 
-    protected fun showProgress() = getBaseActivity().showProgress()
+    override fun onDestroyView() {
+        super.onDestroyView()
+        presenter.onDestroyView()
+    }
 
-    protected fun hideProgress() = getBaseActivity().hideProgress()
-
+    protected fun getBaseActivity() = activity as BaseActivity
 }

@@ -26,10 +26,6 @@ abstract class BaseActivity : AppCompatActivity() {
         }
     }
 
-    internal fun setToolbarTitle(title: String) {
-        this.title = title
-    }
-
     internal fun notify(@StringRes message: Int) =
         Snackbar.make(baseContainer, message, Snackbar.LENGTH_SHORT).show()
 
