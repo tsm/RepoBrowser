@@ -1,6 +1,9 @@
 package com.tomszom.repobrowser.repository
 
-import android.util.Log
+import android.os.Bundle
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
+import android.view.View
 import com.apollographql.apollo.ApolloClient
 import com.apollographql.apollo.api.Response
 import com.apollographql.apollo.rx2.Rx2Apollo
@@ -18,9 +21,16 @@ import okhttp3.OkHttpClient
 
 class RepositoryFragment : BaseFragment() {
 
+    private val repositoryAdapter = RepositoryAdapter()
+
     override fun layoutId() = R.layout.repository_fragment
 
     private var repositoriesDisposable: Disposable? = null
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setupRecycler()
+    }
 
     override fun onResume() {
         super.onResume()
@@ -34,6 +44,11 @@ class RepositoryFragment : BaseFragment() {
         }
     }
 
+    private fun setupRecycler() {
+        repositoryList.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+        repositoryList.adapter = repositoryAdapter
+    }
+
     private fun loadRepositories(){
         val serverUrl = "https://api.github.com/graphql"
 
@@ -41,7 +56,6 @@ class RepositoryFragment : BaseFragment() {
 
         val apolloClient = ApolloClient.builder()
             .serverUrl(serverUrl)
-            .logger { priority, message, t, args -> Log.d("apolloLogger", message) }
             .okHttpClient(OkHttpClient.Builder()
                 .authenticator { route, response ->
                     response.request().newBuilder()
@@ -65,12 +79,12 @@ class RepositoryFragment : BaseFragment() {
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe {
                 showProgress()
-                repositoryEmptyView.gone()
+                repositoryEmpty.gone()
             }
             .doOnTerminate { hideProgress() }
             .subscribe(
                 { response ->
-                    showRepositories(mapResponseToList(response))
+                    showRepositories(mapResponseToList(response).reversed())
                 },
                 { e ->
                     e.printStackTrace()
@@ -80,13 +94,9 @@ class RepositoryFragment : BaseFragment() {
     }
 
     private fun showRepositories(list: List<UserRepositoriesQuery.Node>) {
+        repositoryAdapter.repositoryList = list
         if (list.isEmpty()) {
-            repositoryEmptyView.visible()
-        } else { //TODO use adapter and Recycler
-            val sb = StringBuilder()
-            list.map { sb.append(it.name()).append("\n") }
-            repositoryEmptyView.text = sb.toString()
-            repositoryEmptyView.visible()
+            repositoryEmpty.visible()
         }
     }
 
