@@ -16,7 +16,6 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.repository_fragment.*
 import okhttp3.OkHttpClient
-import java.lang.StringBuilder
 
 
 class RepositoryFragment : Fragment() {
@@ -45,7 +44,7 @@ class RepositoryFragment : Fragment() {
     private fun loadRepositories(){
         val serverUrl = "https://api.github.com/graphql"
 
-        val token = "" //TODO put token in safe place or get it from login credentials
+        val token = getString(R.string.github_oauth_token)
 
         val apolloClient = ApolloClient.builder()
             .serverUrl(serverUrl)
