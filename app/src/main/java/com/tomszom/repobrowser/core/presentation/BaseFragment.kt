@@ -1,12 +1,12 @@
 package com.tomszom.repobrowser.core.presentation
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import dagger.android.support.DaggerFragment
 
-abstract class BaseFragment<out P : BaseContract.Presenter> : Fragment(), BaseContract.View {
+abstract class BaseFragment<out P : BaseContract.Presenter> : DaggerFragment(), BaseContract.View {
 
     abstract val presenter: P
 

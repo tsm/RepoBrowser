@@ -5,14 +5,14 @@ import android.support.annotation.LayoutRes
 import android.support.annotation.StringRes
 import android.support.design.widget.Snackbar
 import android.support.v4.content.ContextCompat
-import android.support.v7.app.AppCompatActivity
 import com.tomszom.repobrowser.R
 import com.tomszom.repobrowser.core.extension.gone
 import com.tomszom.repobrowser.core.extension.visible
+import dagger.android.support.DaggerAppCompatActivity
 import kotlinx.android.synthetic.main.base_content.*
 import kotlinx.android.synthetic.main.base_toolbar.*
 
-abstract class BaseActivity : AppCompatActivity() {
+abstract class BaseActivity : DaggerAppCompatActivity() {
 
     @LayoutRes
     abstract fun layoutId(): Int

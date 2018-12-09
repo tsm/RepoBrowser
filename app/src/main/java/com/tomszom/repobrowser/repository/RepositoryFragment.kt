@@ -10,12 +10,15 @@ import com.tomszom.repobrowser.core.extension.gone
 import com.tomszom.repobrowser.core.extension.visible
 import com.tomszom.repobrowser.core.presentation.BaseFragment
 import kotlinx.android.synthetic.main.repository_fragment.*
+import javax.inject.Inject
 
 
-class RepositoryFragment : BaseFragment<RepositoryPresenter>(), RepositoryContract.View {
+class RepositoryFragment : BaseFragment<RepositoryContract.Presenter>(), RepositoryContract.View {
 
     private val repositoryAdapter = RepositoryAdapter()
-    override val presenter = RepositoryPresenter()
+
+    @Inject
+    override lateinit var presenter: RepositoryContract.Presenter
 
     override fun getLayoutId() = R.layout.repository_fragment
     override fun getViewId() = "RepositoryFragment"
@@ -23,9 +26,6 @@ class RepositoryFragment : BaseFragment<RepositoryPresenter>(), RepositoryContra
     override fun getGitUser() = "tsm" //TODO get it from bundle/argument
     override fun getToken() = getString(R.string.github_oauth_token)
 
-    init {
-        presenter.view = this
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

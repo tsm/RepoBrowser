@@ -9,10 +9,10 @@ import com.tomszom.repobrowser.core.presentation.BasePresenter
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import javax.inject.Inject
 
-class RepositoryPresenter : BasePresenter(), RepositoryContract.Presenter {
-
-    lateinit var view: RepositoryContract.View
+class RepositoryPresenter @Inject constructor(val view: RepositoryContract.View) : BasePresenter(),
+    RepositoryContract.Presenter {
 
     override fun onResume() {
         super.onResume()
