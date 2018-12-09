@@ -13,10 +13,12 @@ interface OwnerContract {
         fun hideEmpty()
         fun showOwners(list: List<OwnerQuery.RepositoryOwner>)
         fun startRepositoryActivity(login: String)
+        fun resetNewOwnerInput()
     }
 
     interface Presenter : BaseContract.Presenter {
         fun refreshAction()
+        fun addOwner(newOwner: String)
         fun onOwnerClick(login: String)
     }
 }

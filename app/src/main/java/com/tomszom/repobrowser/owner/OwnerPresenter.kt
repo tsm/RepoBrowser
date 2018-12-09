@@ -9,7 +9,7 @@ class OwnerPresenter @Inject constructor(
     private val getOwnersUseCase: GetOwnersUseCase
 ) : BasePresenter(), OwnerContract.Presenter {
 
-    val owners = listOf("tsm", "github", "square")
+    val owners = mutableListOf("tsm", "github")
 
     override fun onResume() {
         super.onResume()
@@ -42,5 +42,13 @@ class OwnerPresenter @Inject constructor(
 
     override fun onOwnerClick(login: String) {
         view.startRepositoryActivity(login)
+    }
+
+    override fun addOwner(newOwner: String) {
+        if (newOwner.isNotBlank() && !owners.contains(newOwner)) {
+            owners.add(newOwner)
+            refreshAction()
+        }
+        view.resetNewOwnerInput()
     }
 }

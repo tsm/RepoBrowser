@@ -3,10 +3,14 @@
 
     <string name="common_error">Ups, something went wrong</string>
     <string name="common_action_retry">Retry</string>
+    <string name="common_action_add">Add</string>
+
+    <string name="owner_empty_list">Oh dear, the list is empty</string>
+    <string name="owner_list_title">List of Owners</string>
+    <string name="owner_add_new">Add a new owner</string>
 
     <string name="repository_list_title">Repositories of %s</string>
     <string name="repository_empty_list">Ups, repository list is empty</string>
 
-    <string name="owner_empty_list">Oh dear, the list is empty</string>
-    <string name="owner_list_title">List of Owners</string>
+
 </resources>

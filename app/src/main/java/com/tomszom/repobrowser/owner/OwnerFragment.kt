@@ -7,6 +7,7 @@ import android.view.View
 import com.tomszom.repobrowser.OwnerQuery
 import com.tomszom.repobrowser.R
 import com.tomszom.repobrowser.core.extension.gone
+import com.tomszom.repobrowser.core.extension.onImeDone
 import com.tomszom.repobrowser.core.extension.visible
 import com.tomszom.repobrowser.core.presentation.BaseFragment
 import com.tomszom.repobrowser.repository.RepositoryActivity
@@ -30,6 +31,13 @@ class OwnerFragment : BaseFragment<OwnerContract.Presenter>(), OwnerContract.Vie
         super.onViewCreated(view, savedInstanceState)
         showOwnerListTitle()
         setupRecycler()
+        setupOnClicks()
+    }
+
+    private fun setupOnClicks() {
+        ownerAdapter.onOwnerClick = presenter::onOwnerClick
+        ownerAddButton.setOnClickListener { presenter.addOwner(ownerInput.text.toString()) }
+        ownerInput.onImeDone(presenter::addOwner)
     }
 
     private fun showOwnerListTitle() {
@@ -37,7 +45,6 @@ class OwnerFragment : BaseFragment<OwnerContract.Presenter>(), OwnerContract.Vie
     }
 
     private fun setupRecycler() {
-        ownerAdapter.onOwnerClick = presenter::onOwnerClick
         ownerList.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         ownerList.adapter = ownerAdapter
     }
@@ -67,6 +74,12 @@ class OwnerFragment : BaseFragment<OwnerContract.Presenter>(), OwnerContract.Vie
 
     override fun showOwners(list: List<OwnerQuery.RepositoryOwner>) {
         ownerAdapter.ownerList = list
+    }
+
+    override fun resetNewOwnerInput() {
+        ownerInput.text = null
+        ownerSeparator.requestFocus()
+        getBaseActivity().hideKeyboard()
     }
 
     override fun startRepositoryActivity(login: String) {
