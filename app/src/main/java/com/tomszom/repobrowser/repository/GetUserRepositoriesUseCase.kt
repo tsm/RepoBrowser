@@ -10,10 +10,12 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class GetUserRepositoriesUseCase @Inject constructor(private val apolloClient: ApolloClient) :
+open class GetUserRepositoriesUseCase @Inject constructor(private val apolloClient: ApolloClient) :
     UseCase<String, List<UserRepositoriesQuery.Node>>() {
 
-    override val tag = "GetUserRepositoriesUseCase"
+    companion object {
+        const val TAG = "GetUserRepositoriesUseCase"
+    }
 
     override fun getObservable(param: String): Observable<List<UserRepositoriesQuery.Node>> {
 

@@ -11,14 +11,10 @@ class RepositoryPresenter @Inject constructor(
 
     override fun onResume() {
         super.onResume()
-        loadRepositories()
+        refreshAction()
     }
 
     override fun refreshAction() {
-        loadRepositories()
-    }
-
-    private fun loadRepositories() {
         getUserRepositoriesUseCase.getObservable(view.getGitUser())
             .doOnSubscribe {
                 view.showProgress()
@@ -38,6 +34,6 @@ class RepositoryPresenter @Inject constructor(
                     }
                     view.showError()
                 }
-            ).addWeakDisposable(getUserRepositoriesUseCase.tag)
+            ).addWeakDisposable(GetUserRepositoriesUseCase.TAG)
     }
 }
