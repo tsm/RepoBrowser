@@ -28,7 +28,7 @@ class RepositoryPresenterTest {
     }
 
     @Test
-    fun testGetUserRepos_errorCase_showError() {
+    fun testGetOwnerRepositories_errorCase_showError() {
         // Given
         val error = "Test error"
         val observable: Observable<List<RepositoriesQuery.Node>> = Observable.create { emitter ->
@@ -50,7 +50,7 @@ class RepositoryPresenterTest {
     }
 
     @Test
-    fun testGetUserRepos_normalCase_showRepos() {
+    fun testGetOwnerRepositories_normalCase_showRepos() {
         // Given
         val observable: Observable<List<RepositoriesQuery.Node>> = Observable.fromCallable {
             listOf(
@@ -75,7 +75,7 @@ class RepositoryPresenterTest {
     }
 
     @Test
-    fun testGetUserRepos_emptyCase_showEmpty() {
+    fun testGetOwnerRepositories_emptyCase_showEmpty() {
         // Given
         val observable: Observable<List<RepositoriesQuery.Node>> = Observable.fromCallable {
             emptyList<RepositoriesQuery.Node>()

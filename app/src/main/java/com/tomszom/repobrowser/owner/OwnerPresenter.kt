@@ -25,10 +25,9 @@ class OwnerPresenter @Inject constructor(
             .doOnTerminate { view.hideProgress() }
             .subscribe(
                 { list ->
+                    view.showOwners(list.sortedBy { it.login() })
                     if (list.isEmpty()) {
                         view.showEmpty()
-                    } else {
-                        view.showOwners(list.sortedBy { it.login() })
                     }
                 },
                 { e ->
