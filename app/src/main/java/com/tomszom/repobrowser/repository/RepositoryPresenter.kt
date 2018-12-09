@@ -38,6 +38,6 @@ class RepositoryPresenter @Inject constructor(
                     }
                     view.showError()
                 }
-            ).addWeakDisposable(getUserRepositoriesUseCase.getTag())
+            ).addWeakDisposable(getUserRepositoriesUseCase.tag)
     }
 }

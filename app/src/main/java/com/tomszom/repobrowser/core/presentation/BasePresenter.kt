@@ -27,18 +27,18 @@ abstract class BasePresenter : BaseContract.Presenter {
         disposables.clear()
     }
 
-    protected fun Disposable.addWeakDisposable(key: String) {
-        disposeWithKey(weakDisposables, key)
-        weakDisposables[key] = this
+    protected fun Disposable.addWeakDisposable(tag: String) {
+        disposeWithTag(weakDisposables, tag)
+        weakDisposables[tag] = this
     }
 
-    protected fun Disposable.addPersistDisposable(key: String) {
-        disposeWithKey(persistDisposables, key)
-        persistDisposables[key] = this
+    protected fun Disposable.addPersistDisposable(tag: String) {
+        disposeWithTag(persistDisposables, tag)
+        persistDisposables[tag] = this
     }
 
-    private fun disposeWithKey(disposables: HashMap<String, Disposable>, key: String) {
-        val disposable = disposables.remove(key)
+    private fun disposeWithTag(disposables: HashMap<String, Disposable>, tag: String) {
+        val disposable = disposables.remove(tag)
         if (disposable?.isDisposed == false) {
             disposable.dispose()
         }
