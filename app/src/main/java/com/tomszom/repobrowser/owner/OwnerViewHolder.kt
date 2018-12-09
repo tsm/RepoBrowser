@@ -2,6 +2,8 @@ package com.tomszom.repobrowser.owner
 
 import android.support.v7.widget.RecyclerView
 import android.view.View
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.tomszom.repobrowser.OwnerQuery
 import com.tomszom.repobrowser.R
 import kotlinx.android.extensions.LayoutContainer
@@ -14,10 +16,27 @@ class OwnerViewHolder(override val containerView: View) : RecyclerView.ViewHolde
     }
 
     fun bind(model: OwnerQuery.RepositoryOwner, onOwnerClick: (String) -> Unit) {
+
         ownerItemLogin.text = model.login()
-        //TODO icon
+        loadAvatar(model.avatarUrl() as String)
 
         containerView.setOnClickListener { onOwnerClick.invoke(model.login()) }
+    }
+
+    private fun loadAvatar(avatarUrl: String) {
+        val ownerIconId = R.drawable.ic_owner
+        if (avatarUrl.isBlank()) {
+            ownerItemAvatar.setImageResource(ownerIconId)
+        } else {
+            Glide.with(containerView.context)
+                .load(avatarUrl)
+                .apply(
+                    RequestOptions.placeholderOf(ownerIconId)
+                        .error(ownerIconId)
+                        .fitCenter()
+                )
+                .into(ownerItemAvatar)
+        }
     }
 
 }
