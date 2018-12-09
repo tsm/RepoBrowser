@@ -83,9 +83,12 @@ class OwnerFragment : BaseFragment<OwnerContract.Presenter>(), OwnerContract.Vie
     }
 
     override fun startRepositoryActivity(login: String) {
-        getBaseActivity().startActivity(
-            getBaseActivity().intentFor<RepositoryActivity>()
-                .putExtra(RepositoryActivity.EXTRA_LOGIN, login)
-        )
+        getBaseActivity().run {
+            startActivity(
+                getBaseActivity().intentFor<RepositoryActivity>()
+                    .putExtra(RepositoryActivity.EXTRA_LOGIN, login)
+            )
+            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+        }
     }
 }

@@ -29,6 +29,11 @@ abstract class BaseActivity : DaggerAppCompatActivity() {
         }
     }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right)
+    }
+
     internal fun notify(@StringRes message: Int) =
         Snackbar.make(baseContainer, message, Snackbar.LENGTH_SHORT).show()
 
