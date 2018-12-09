@@ -1,4 +1,4 @@
-package com.tomszom.repobrowser.core.di
+package com.tomszom.repobrowser.core.di.scopes
 
 import javax.inject.Scope
 

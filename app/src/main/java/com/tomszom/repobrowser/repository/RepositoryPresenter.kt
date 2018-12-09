@@ -1,17 +1,20 @@
 package com.tomszom.repobrowser.repository
 
+import com.apollographql.apollo.ApolloClient
 import com.apollographql.apollo.api.Response
 import com.apollographql.apollo.rx2.Rx2Apollo
 import com.tomszom.repobrowser.BuildConfig
 import com.tomszom.repobrowser.UserRepositoriesQuery
-import com.tomszom.repobrowser.core.network.NetworkClientProvider
 import com.tomszom.repobrowser.core.presentation.BasePresenter
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class RepositoryPresenter @Inject constructor(val view: RepositoryContract.View) : BasePresenter(),
+class RepositoryPresenter @Inject constructor(
+    val view: RepositoryContract.View,
+    val apolloClient: ApolloClient
+) : BasePresenter(),
     RepositoryContract.Presenter {
 
     override fun onResume() {
@@ -50,8 +53,6 @@ class RepositoryPresenter @Inject constructor(val view: RepositoryContract.View)
     }
 
     private fun getRepositoryListObservable(user: String): Observable<Response<UserRepositoriesQuery.Data>> {
-        val apolloClient = NetworkClientProvider.provideApolloClient(view.getToken())
-
         val query = UserRepositoriesQuery.builder().user_login(user).build()
 
         val apolloCall = apolloClient.query(query)

@@ -1,5 +1,6 @@
 package com.tomszom.repobrowser.repository
 
+import com.apollographql.apollo.ApolloClient
 import dagger.Module
 import dagger.Provides
 
@@ -12,8 +13,11 @@ class RepositoryModule {
         repositoryFragment
 
     @Provides
-    fun provideRepositoryPresenter(view: RepositoryContract.View): RepositoryContract.Presenter =
-        RepositoryPresenter(view)
+    fun provideRepositoryPresenter(
+        view: RepositoryContract.View,
+        apolloClient: ApolloClient
+    ): RepositoryContract.Presenter =
+        RepositoryPresenter(view, apolloClient)
 
 
 }
