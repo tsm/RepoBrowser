@@ -9,7 +9,7 @@ class OwnerPresenter @Inject constructor(
     private val getOwnersUseCase: GetOwnersUseCase
 ) : BasePresenter(), OwnerContract.Presenter {
 
-    val owners = listOf("tsm")
+    val owners = listOf("tsm", "github", "square")
 
     override fun onResume() {
         super.onResume()
@@ -28,7 +28,7 @@ class OwnerPresenter @Inject constructor(
                     if (list.isEmpty()) {
                         view.showEmpty()
                     } else {
-                        view.showOwners(list)
+                        view.showOwners(list.sortedBy { it.login() })
                     }
                 },
                 { e ->

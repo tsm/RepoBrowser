@@ -22,15 +22,19 @@ open class GetOwnersUseCase @Inject constructor(
         return if (param.isEmpty()) {
             Observable.fromCallable { emptyList<OwnerQuery.RepositoryOwner>() }
         } else {
-            val query = OwnerQuery.builder().login(param.first()).build() //TODO get more than one
-
-            val apolloCall = apolloClient.query(query)
-
-            Rx2Apollo.from<OwnerQuery.Data>(apolloCall).map { mapResponseToOwner(it, param.first()) }.toList()
-                .toObservable()
+            Observable.fromIterable(param).flatMap(this::getOwnerObservable).toList().toObservable()
                 .subscribeOn(schedulerProvider.ioScheduler())
                 .observeOn(schedulerProvider.uiScheduler())
         }
+    }
+
+    private fun getOwnerObservable(login: String): Observable<OwnerQuery.RepositoryOwner> {
+
+        val query = OwnerQuery.builder().login(login).build()
+
+        val apolloCall = apolloClient.query(query)
+
+        return Rx2Apollo.from<OwnerQuery.Data>(apolloCall).map { mapResponseToOwner(it, login) }
     }
 
     private fun mapResponseToOwner(response: Response<OwnerQuery.Data>?, login: String): OwnerQuery.RepositoryOwner {
