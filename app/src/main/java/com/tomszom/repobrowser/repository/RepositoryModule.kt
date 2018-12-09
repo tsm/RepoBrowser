@@ -14,9 +14,9 @@ class RepositoryModule {
     @Provides
     fun provideRepositoryPresenter(
         view: RepositoryContract.View,
-        getUserRepositoriesUseCase: GetUserRepositoriesUseCase
+        getRepositoriesUseCase: GetRepositoriesUseCase
     ): RepositoryContract.Presenter =
-        RepositoryPresenter(view, getUserRepositoriesUseCase)
+        RepositoryPresenter(view, getRepositoriesUseCase)
 
 
 }

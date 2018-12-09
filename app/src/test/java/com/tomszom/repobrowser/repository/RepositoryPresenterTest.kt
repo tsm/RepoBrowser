@@ -1,6 +1,6 @@
 package com.tomszom.repobrowser.repository
 
-import com.tomszom.repobrowser.UserRepositoriesQuery
+import com.tomszom.repobrowser.RepositoriesQuery
 import io.reactivex.Observable
 import org.junit.Before
 import org.junit.Test
@@ -14,7 +14,7 @@ import org.mockito.MockitoAnnotations
 class RepositoryPresenterTest {
 
     @Mock
-    lateinit var mockGetUserRepositoriesUseCase: GetUserRepositoriesUseCase
+    lateinit var mockGetRepositoriesUseCase: GetRepositoriesUseCase
 
     @Mock
     lateinit var mockView: RepositoryContract.View
@@ -24,20 +24,20 @@ class RepositoryPresenterTest {
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
-        repositoryPresenter = RepositoryPresenter(mockView, mockGetUserRepositoriesUseCase)
+        repositoryPresenter = RepositoryPresenter(mockView, mockGetRepositoriesUseCase)
     }
 
     @Test
     fun testGetUserRepos_errorCase_showError() {
         // Given
         val error = "Test error"
-        val observable: Observable<List<UserRepositoriesQuery.Node>> = Observable.create { emitter ->
+        val observable: Observable<List<RepositoriesQuery.Node>> = Observable.create { emitter ->
             emitter.onError(Exception(error))
         }
 
         // When
-        `when`(mockView.getGitUser()).thenReturn("test_user")
-        `when`(mockGetUserRepositoriesUseCase.getObservable(anyString())).thenReturn(observable)
+        `when`(mockView.getOwnerLogin()).thenReturn("test_user")
+        `when`(mockGetRepositoriesUseCase.getObservable(anyString())).thenReturn(observable)
 
         repositoryPresenter.onResume()
 
@@ -52,17 +52,17 @@ class RepositoryPresenterTest {
     @Test
     fun testGetUserRepos_normalCase_showRepos() {
         // Given
-        val observable: Observable<List<UserRepositoriesQuery.Node>> = Observable.fromCallable {
+        val observable: Observable<List<RepositoriesQuery.Node>> = Observable.fromCallable {
             listOf(
-                UserRepositoriesQuery.Node("testType", "testName1", "testUrl1"),
-                UserRepositoriesQuery.Node("testType", "testName2", "testUrl2"),
-                UserRepositoriesQuery.Node("testType", "testName2", "testUrl2")
+                RepositoriesQuery.Node("testType", "testName1", "testUrl1"),
+                RepositoriesQuery.Node("testType", "testName2", "testUrl2"),
+                RepositoriesQuery.Node("testType", "testName2", "testUrl2")
             )
         }
 
         // When
-        `when`(mockView.getGitUser()).thenReturn("test_user")
-        `when`(mockGetUserRepositoriesUseCase.getObservable(anyString())).thenReturn(observable)
+        `when`(mockView.getOwnerLogin()).thenReturn("test_user")
+        `when`(mockGetRepositoriesUseCase.getObservable(anyString())).thenReturn(observable)
 
         repositoryPresenter.onResume()
 
@@ -77,13 +77,13 @@ class RepositoryPresenterTest {
     @Test
     fun testGetUserRepos_emptyCase_showEmpty() {
         // Given
-        val observable: Observable<List<UserRepositoriesQuery.Node>> = Observable.fromCallable {
-            emptyList<UserRepositoriesQuery.Node>()
+        val observable: Observable<List<RepositoriesQuery.Node>> = Observable.fromCallable {
+            emptyList<RepositoriesQuery.Node>()
         }
 
         // When
-        `when`(mockView.getGitUser()).thenReturn("test_user")
-        `when`(mockGetUserRepositoriesUseCase.getObservable(anyString())).thenReturn(observable)
+        `when`(mockView.getOwnerLogin()).thenReturn("test_user")
+        `when`(mockGetRepositoriesUseCase.getObservable(anyString())).thenReturn(observable)
 
         repositoryPresenter.onResume()
 

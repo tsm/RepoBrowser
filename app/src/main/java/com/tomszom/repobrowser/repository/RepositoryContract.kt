@@ -1,19 +1,19 @@
 package com.tomszom.repobrowser.repository
 
-import com.tomszom.repobrowser.UserRepositoriesQuery
+import com.tomszom.repobrowser.RepositoriesQuery
 import com.tomszom.repobrowser.core.presentation.BaseContract
 
 interface RepositoryContract {
 
     interface View : BaseContract.View {
-        fun getGitUser(): String
+        fun getOwnerLogin(): String
 
         fun showProgress()
         fun hideProgress()
         fun showError()
         fun showEmpty()
         fun hideEmpty()
-        fun showRepositories(list: List<UserRepositoriesQuery.Node>)
+        fun showRepositories(list: List<RepositoriesQuery.Node>)
     }
 
     interface Presenter : BaseContract.Presenter {

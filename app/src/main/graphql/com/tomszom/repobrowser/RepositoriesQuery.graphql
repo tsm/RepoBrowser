@@ -1,5 +1,5 @@
-query UserRepositoriesQuery($user_login: String!) {
-  user(login: $user_login) {
+query RepositoriesQuery($login: String!) {
+  repositoryOwner(login: $login) {
     repositories(last: 100) {
       nodes {
         name

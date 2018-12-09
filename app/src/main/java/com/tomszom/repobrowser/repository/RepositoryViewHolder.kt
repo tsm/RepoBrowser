@@ -3,7 +3,7 @@ package com.tomszom.repobrowser.repository
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import com.tomszom.repobrowser.R
-import com.tomszom.repobrowser.UserRepositoriesQuery
+import com.tomszom.repobrowser.RepositoriesQuery
 import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.repository_item.*
 
@@ -13,7 +13,7 @@ class RepositoryViewHolder(override val containerView: View) : RecyclerView.View
         const val LAYOUT_ID = R.layout.repository_item
     }
 
-    fun bind(model: UserRepositoriesQuery.Node) {
+    fun bind(model: RepositoriesQuery.Node) {
         repositoryItemName.text = model.name()
         repositoryItemUrl.text = model.url() as String
     }

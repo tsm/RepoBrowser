@@ -5,7 +5,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import com.tomszom.repobrowser.R
-import com.tomszom.repobrowser.UserRepositoriesQuery
+import com.tomszom.repobrowser.RepositoriesQuery
 import com.tomszom.repobrowser.core.extension.gone
 import com.tomszom.repobrowser.core.extension.visible
 import com.tomszom.repobrowser.core.presentation.BaseFragment
@@ -23,11 +23,11 @@ class RepositoryFragment : BaseFragment<RepositoryContract.Presenter>(), Reposit
     override fun getLayoutId() = R.layout.repository_fragment
     override fun getViewId() = "RepositoryFragment"
 
-    override fun getGitUser() = "tsm" //TODO get it from bundle/argument
+    override fun getOwnerLogin() = "tsm" //TODO get it from bundle/argument
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        showRepositoryListTitle(getGitUser())
+        showRepositoryListTitle(getOwnerLogin())
         setupRecycler()
     }
 
@@ -63,7 +63,7 @@ class RepositoryFragment : BaseFragment<RepositoryContract.Presenter>(), Reposit
         ) { presenter.refreshAction() }
     }
 
-    override fun showRepositories(list: List<UserRepositoriesQuery.Node>) {
+    override fun showRepositories(list: List<RepositoriesQuery.Node>) {
         repositoryAdapter.repositoryList = list
     }
 }

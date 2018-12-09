@@ -6,7 +6,7 @@ import javax.inject.Inject
 
 class RepositoryPresenter @Inject constructor(
     val view: RepositoryContract.View,
-    private val getUserRepositoriesUseCase: GetUserRepositoriesUseCase
+    private val getRepositoriesUseCase: GetRepositoriesUseCase
 ) : BasePresenter(), RepositoryContract.Presenter {
 
     override fun onResume() {
@@ -15,7 +15,7 @@ class RepositoryPresenter @Inject constructor(
     }
 
     override fun refreshAction() {
-        getUserRepositoriesUseCase.getObservable(view.getGitUser())
+        getRepositoriesUseCase.getObservable(view.getOwnerLogin())
             .doOnSubscribe {
                 view.showProgress()
                 view.hideEmpty()
@@ -34,6 +34,6 @@ class RepositoryPresenter @Inject constructor(
                     }
                     view.showError()
                 }
-            ).addWeakDisposable(GetUserRepositoriesUseCase.TAG)
+            ).addWeakDisposable(GetRepositoriesUseCase.TAG)
     }
 }
