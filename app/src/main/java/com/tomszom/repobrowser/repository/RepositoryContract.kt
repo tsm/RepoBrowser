@@ -7,7 +7,6 @@ interface RepositoryContract {
 
     interface View : BaseContract.View {
         fun getGitUser(): String
-        fun getToken(): String
 
         fun showProgress()
         fun hideProgress()

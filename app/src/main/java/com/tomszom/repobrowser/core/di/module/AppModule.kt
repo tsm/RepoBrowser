@@ -1,4 +1,4 @@
-package com.tomszom.repobrowser.core.di
+package com.tomszom.repobrowser.core.di.module
 
 import android.app.Application
 import android.content.Context

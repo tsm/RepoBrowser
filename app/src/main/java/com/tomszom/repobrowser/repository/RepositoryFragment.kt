@@ -24,8 +24,6 @@ class RepositoryFragment : BaseFragment<RepositoryContract.Presenter>(), Reposit
     override fun getViewId() = "RepositoryFragment"
 
     override fun getGitUser() = "tsm" //TODO get it from bundle/argument
-    override fun getToken() = getString(R.string.github_oauth_token)
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

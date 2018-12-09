@@ -3,7 +3,7 @@ package com.tomszom.repobrowser.core.network
 import android.content.Context
 import com.apollographql.apollo.ApolloClient
 import com.tomszom.repobrowser.R
-import com.tomszom.repobrowser.core.di.scopes.PerApplication
+import com.tomszom.repobrowser.core.di.scope.PerApplication
 import com.tomszom.repobrowser.type.CustomType
 import dagger.Module
 import dagger.Provides

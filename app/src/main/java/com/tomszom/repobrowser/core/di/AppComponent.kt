@@ -1,7 +1,9 @@
 package com.tomszom.repobrowser.core.di
 
 import android.app.Application
-import com.tomszom.repobrowser.core.di.scopes.PerApplication
+import com.tomszom.repobrowser.core.di.module.ActivitiesModule
+import com.tomszom.repobrowser.core.di.module.AppModule
+import com.tomszom.repobrowser.core.di.scope.PerApplication
 import com.tomszom.repobrowser.core.network.NetworkModule
 import dagger.BindsInstance
 import dagger.Component

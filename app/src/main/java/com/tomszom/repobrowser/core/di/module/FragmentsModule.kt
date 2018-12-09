@@ -1,4 +1,4 @@
-package com.tomszom.repobrowser.core.di
+package com.tomszom.repobrowser.core.di.module
 
 import com.tomszom.repobrowser.repository.RepositoryFragment
 import com.tomszom.repobrowser.repository.RepositoryModule

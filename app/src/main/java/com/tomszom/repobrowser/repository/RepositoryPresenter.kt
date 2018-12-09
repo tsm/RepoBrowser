@@ -13,9 +13,8 @@ import javax.inject.Inject
 
 class RepositoryPresenter @Inject constructor(
     val view: RepositoryContract.View,
-    val apolloClient: ApolloClient
-) : BasePresenter(),
-    RepositoryContract.Presenter {
+    private val apolloClient: ApolloClient
+) : BasePresenter(), RepositoryContract.Presenter {
 
     override fun onResume() {
         super.onResume()

@@ -1,6 +1,6 @@
-package com.tomszom.repobrowser.core.di
+package com.tomszom.repobrowser.core.di.module
 
-import com.tomszom.repobrowser.core.di.scopes.PerActivity
+import com.tomszom.repobrowser.core.di.scope.PerActivity
 import com.tomszom.repobrowser.repository.RepositoryActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
