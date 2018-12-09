@@ -3,7 +3,6 @@ package com.tomszom.repobrowser.repository
 import dagger.Module
 import dagger.Provides
 
-
 @Module
 class RepositoryModule {
 

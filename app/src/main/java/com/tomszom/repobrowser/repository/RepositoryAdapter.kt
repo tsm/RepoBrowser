@@ -4,8 +4,9 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.tomszom.repobrowser.RepositoriesQuery
+import javax.inject.Inject
 
-class RepositoryAdapter : RecyclerView.Adapter<RepositoryViewHolder>() {
+class RepositoryAdapter @Inject constructor() : RecyclerView.Adapter<RepositoryViewHolder>() {
 
     var repositoryList: List<RepositoriesQuery.Node> = emptyList()
         set(value) {

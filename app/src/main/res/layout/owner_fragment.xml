@@ -3,23 +3,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".repository.RepositoryFragment"
-    tools:showIn="@layout/repository_activity">
+    tools:context=".owner.OwnerFragment"
+    tools:showIn="@layout/owner_activity">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/repositoryList"
+        android:id="@+id/ownerList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/repository_row" />
+        tools:listitem="@layout/owner_row" />
 
     <TextView
-        android:id="@+id/repositoryEmpty"
+        android:id="@+id/ownerEmpty"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="32dp"
         android:layout_gravity="center"
         android:gravity="center"
-        android:text="@string/repository_empty_list"
+        android:text="@string/owner_empty_list"
         android:textSize="18sp"
         android:visibility="gone"
         tools:visibility="visible" />

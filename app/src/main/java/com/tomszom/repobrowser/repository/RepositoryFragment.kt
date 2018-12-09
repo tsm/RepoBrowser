@@ -15,7 +15,8 @@ import javax.inject.Inject
 
 class RepositoryFragment : BaseFragment<RepositoryContract.Presenter>(), RepositoryContract.View {
 
-    private val repositoryAdapter = RepositoryAdapter()
+    @Inject
+    lateinit var repositoryAdapter: RepositoryAdapter
 
     @Inject
     override lateinit var presenter: RepositoryContract.Presenter
@@ -23,7 +24,7 @@ class RepositoryFragment : BaseFragment<RepositoryContract.Presenter>(), Reposit
     override fun getLayoutId() = R.layout.repository_fragment
     override fun getViewId() = "RepositoryFragment"
 
-    override fun getOwnerLogin() = "tsm" //TODO get it from bundle/argument
+    override fun getOwnerLogin(): String = getBaseActivity().intent.getStringExtra(RepositoryActivity.EXTRA_LOGIN)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

@@ -1,0 +1,6 @@
+query OwnerQuery($login: String!) {
+  repositoryOwner(login: $login) {
+    avatarUrl
+    login
+  }
+}

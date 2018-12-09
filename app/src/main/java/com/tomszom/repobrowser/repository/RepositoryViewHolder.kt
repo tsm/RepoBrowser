@@ -5,12 +5,12 @@ import android.view.View
 import com.tomszom.repobrowser.R
 import com.tomszom.repobrowser.RepositoriesQuery
 import kotlinx.android.extensions.LayoutContainer
-import kotlinx.android.synthetic.main.repository_item.*
+import kotlinx.android.synthetic.main.repository_row.*
 
 class RepositoryViewHolder(override val containerView: View) : RecyclerView.ViewHolder(containerView), LayoutContainer {
 
     companion object {
-        const val LAYOUT_ID = R.layout.repository_item
+        const val LAYOUT_ID = R.layout.repository_row
     }
 
     fun bind(model: RepositoriesQuery.Node) {
