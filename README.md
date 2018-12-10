@@ -1,5 +1,5 @@
 # RepoBrowser
-The Android app written in Kotlin that uses [GraphQL Github API](https://developer.github.com/v4/) to obtain list of owner (user or organisation) repositories
+The Android app written in Kotlin that uses [GraphQL Github API](https://developer.github.com/v4/) to obtain list of owner (user or organisation) repositories. It is rather a POC than a daily use application.
 
 ![Screenshots](/img/repobrowser_screens.png?raw=true "RepoBrowser screenshots")
 
