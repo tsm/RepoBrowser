@@ -6,7 +6,7 @@ The Android app written in Kotlin that uses [GraphQL Github API](https://develop
 
 ## Build
 
-For the correct operation of the application you need to provide [generated here](https://github.com/settings/tokens/) github OAuth token in the GITHUB_OAUTH_TOKEN environment variable.
+To use API you need to provide [generated here](https://github.com/settings/tokens/) github OAuth token in the GITHUB_OAUTH_TOKEN environment variable.
 
 You can do it on Mac/Linux:
 ```
