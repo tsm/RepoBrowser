@@ -1,5 +1,5 @@
 # RepoBrowser
-The Android app written in Kotlin that uses GraphQL Github API to obtain data
+The Android app written in Kotlin that uses [GraphQL Github API](https://developer.github.com/v4/) to obtain data
 
 ![Screenshots](/img/repobrowser_screens.png?raw=true "RepoBrowser screenshots")
 
@@ -26,6 +26,14 @@ This value can also be changed in `NetworkModule.kt` file
 * [anko](https://github.com/Kotlin/anko) - Kotlin sugars in Android
 * [Mockito](https://site.mockito.org/) - mocking for testing purposes
 * and few more including AndroidSupport libraries
+
+## Inspired by
+
+* [Clean Architecture series](https://fernandocejas.com/2018/05/07/architecting-android-reloaded/) by Fernando Cejas
+* [MVP with Dagger](https://proandroiddev.com/mvp-with-dagger-2-11-847d52c27c5a) by Mladen Rakonjac
+* [Testing MVP with Kotlin and RxJava](https://android.jlelse.eu/complete-example-of-testing-mvp-architecture-with-kotlin-and-rxjava-part-3-df4cf3838581_) by Tamás Kozmér
+
+Many thanks to authors of above articles!
 
 
 
